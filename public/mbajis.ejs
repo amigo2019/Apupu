@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>APUPU</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Custom Google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="/"><span class="fw-bolder text-primary">APUPU</span></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                          <% if(username){ %>
+                            <%- username %> <li class="nav-item"><a class="nav-link" href="sair">(Sair)</a></li>
+                          <% } else{ %>  
+                            <li class="nav-item"><a class="nav-link" href="login">Entrar</a></li>
+                         <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Header-->
+            <header class="py-5">
+                
+                <div class="container px-5 pb-5">
+                    <div class="row gx-5 align-items-center ">
+                        <div class="form-inline my-2 my-lg-0 input-group">
+                            <input id="search" class="form-control mr-sm-2" type="search" placeholder="Digite as palvras da pesquisa" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" onclick="getData()">Pesquisar</button>
+
+                            <script>
+                              async function getData() {
+                                  const search = document.getElementById("search").value;
+                                  window.location.href = "/mbajis?search="+search;
+                                
+                              };
+                          </script>
+                          </div>
+                    </div>
+                    
+                    <% if (lista_de_mbajis.length !=0) { %>
+                    
+                    <div class="row row-cols-1 row-cols-md-3 g-4 pt-5">
+                      <%  for (let mbaji of lista_de_mbajis){ %>
+                        
+                        <div class="col">
+                          <a href="/chat/<%= mbaji._id %>">
+                          <div class="card">
+                            <img src="<%= mbaji.imagem %>" class="card-img-top" />
+                            <div class="card-body">
+                              <h5 class="card-title"><%= mbaji.nome %> </h5>
+                              <p class="card-text">
+                                <%= mbaji.descricao %>
+                              </p>
+                            </div>
+                          </div>
+                        </a>
+                        </div>
+                        
+                        <% } %>
+                      </div>
+                    <% } %>
+                </div>
+            </header>
+        </main>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
